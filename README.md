@@ -21,10 +21,10 @@ At 8am, 11am, 2pm, 5pm, and 8pm the system:
 
 ## Infrastructure
 
-| Component | Host | IP |
-|---|---|---|
-| Docker app + PostgreSQL | pve2 (Ubuntu Server VM) | 192.168.0.30 |
-| Ollama LLM server | Mac Studio M4 Max | 192.168.0.78 |
+| Component | Host |
+|---|---|
+| Docker app + PostgreSQL | Ubuntu Server VM on pve2 |
+| Ollama LLM server | Mac Studio M4 Max |
 | Gmail API | Google Cloud | — |
 
 The Mac Studio runs `llama3:70b` (40GB) fully in unified memory at ~120 tokens/sec. pve2 is a VM on a Proxmox cluster running Docker Compose.
@@ -40,7 +40,7 @@ Gmail API
 Email Fetcher (pve2)
     │  fetches since last run, deduplicates via message_id
     ▼
-Ollama — llama3:70b (Mac Studio 192.168.0.78:11434)
+Ollama — llama3:70b (Mac Studio on local network)
     │  classify → { classification, reason }
     │  draft reply for important emails
     ▼
@@ -191,7 +191,7 @@ docker compose logs app -f
 | `GMAIL_CLIENT_ID` | OAuth2 client ID from Google Cloud |
 | `GMAIL_CLIENT_SECRET` | OAuth2 client secret |
 | `GMAIL_TOKEN_FILE` | Path to saved OAuth token (default: `token.json`) |
-| `OLLAMA_HOST` | Ollama server URL (default: `http://192.168.0.78:11434`) |
+| `OLLAMA_HOST` | Ollama server URL (default: `http://localhost:11434`) |
 | `OLLAMA_MODEL` | Model name (default: `llama3:70b`) |
 | `POSTGRES_PASSWORD` | PostgreSQL password |
 | `POSTGRES_URL` | Full database connection string |

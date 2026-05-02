@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     gmail_client_secret: str
     gmail_token_file: str = "token.json"
 
-    ollama_host: str = "http://192.168.0.78:11434"
+    ollama_host: str = "http://localhost:11434"
     ollama_model: str = "llama3:70b"
 
     postgres_url: str
