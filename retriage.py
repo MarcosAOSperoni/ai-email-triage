@@ -38,7 +38,7 @@ async def main() -> None:
                 else:
                     log.info("[%s] %s | %s", email.classification, email.sender, email.subject)
 
-                if email.classification == "important" and not email.suggested_reply:
+                if email.classification == "action" and not email.suggested_reply:
                     email.suggested_reply = draft_reply(
                         subject=email.subject,
                         sender=email.sender,

@@ -83,7 +83,7 @@ async def run_triage() -> None:
                 log.exception("Classification failed for message %s", email.message_id)
                 email.classification = "informational"
 
-            if email.classification == "important":
+            if email.classification == "action":
                 try:
                     email.suggested_reply = draft_reply(
                         subject=email.subject,
@@ -98,9 +98,10 @@ async def run_triage() -> None:
 
         await session.commit()
 
+    new_action = [e for e in new_emails if e.classification == "action"]
     new_important = [e for e in new_emails if e.classification == "important"]
     if new_emails:
         await send_summary(new_emails)
 
     _save_last_check(now)
-    log.info("Triage complete. %d important, %d total.", len(new_important), len(new_emails))
+    log.info("Triage complete. %d action, %d important, %d total.", len(new_action), len(new_important), len(new_emails))

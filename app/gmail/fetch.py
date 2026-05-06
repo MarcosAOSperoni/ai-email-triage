@@ -31,7 +31,7 @@ def fetch_since(since: datetime) -> list[dict]:
     service = build("gmail", "v1", credentials=creds, cache_discovery=False)
 
     after_ts = int(since.timestamp())
-    query = f"after:{after_ts} -subject:\"Email Triage\""
+    query = f"after:{after_ts} -subject:\"Email Triage\" -from:speronimarcos@gmail.com"
 
     result = service.users().messages().list(userId="me", q=query, maxResults=100).execute()
     message_stubs = result.get("messages", [])

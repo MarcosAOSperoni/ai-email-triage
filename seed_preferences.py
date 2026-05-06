@@ -18,12 +18,15 @@ SENDER_PREFS = [
     "venmo.com",
     "splitwise.com",
     "schwab.com",
+    "capitalone.com",
     # Housing
     "hubatlanta",
     "emailrelay.com",
     # Identity / accounts
     "google.com",
     "anthropic.com",
+    # People — always action
+    "sando.law",
 ]
 
 TOPIC_PREFS = [
